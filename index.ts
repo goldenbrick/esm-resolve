@@ -15,6 +15,7 @@
  */
 
 import * as types from './types/index.js';
+import { fileURLToPath } from 'node:url';
 import * as path from 'node:path';
 import * as fs from 'node:fs';
 import { statIsFile, statOrNull, isLocal } from './lib/helper.js';
@@ -307,7 +308,7 @@ class Resolver {
       url = new URL(importee, this.importerDir);
     }
 
-    let { pathname } = url;
+    let pathname = fileURLToPath(url);
     const suffix = url.search + url.hash;
 
     // Confirm the path actually exists (with extra node things).
